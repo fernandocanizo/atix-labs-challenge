@@ -2,8 +2,9 @@
   "name": "atix-labs-challenge",
   "version": "1.0.0",
   "description": "technical challenge - REST API to write on shared log",
-  "main": "index.js",
+  "main": "src/app.mjs",
   "scripts": {
+    "start": "NODE_ENV=development node src/app.mjs",
     "test": "xo --fix && ava"
   },
   "repository": {
