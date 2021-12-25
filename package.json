@@ -4,7 +4,7 @@
   "description": "technical challenge - REST API to write on shared log",
   "main": "index.js",
   "scripts": {
-    "test": "xo && echo no tests yet"
+    "test": "xo && ava"
   },
   "repository": {
     "type": "git",
@@ -23,8 +23,8 @@
   },
   "homepage": "https://github.com/fernandocanizo/atix-labs-challenge#readme",
   "devDependencies": {
+    "ava": "^3.15.0",
     "xo": "^0.47.0"
   },
-  "xo": {
-	}
+  "xo": {}
 }
