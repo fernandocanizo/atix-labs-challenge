@@ -1,11 +1,8 @@
 import express from 'express';
+import v1Api from './route/v1.mjs';
 
 const app = express();
-const port = 3000;
 
-app.get('/', (request, response) => {
-	response.send('hello');
-});
+app.use('/v1', v1Api);
 
-app.listen(port);
-
+export default app;
