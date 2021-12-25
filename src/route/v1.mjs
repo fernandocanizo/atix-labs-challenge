@@ -1,8 +1,8 @@
 import express from 'express';
-import create from '../controller/log.mjs';
+import log from '../controller/log.mjs';
 
 const router = express.Router();
 
-router.get('/', create);
+router.post('/', log);
 
 export default router;

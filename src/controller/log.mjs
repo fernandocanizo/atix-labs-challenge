@@ -1,5 +1,5 @@
-const create = (_, res) => {
-  res.send('hello from here now');
+const log = (req, res) => {
+  res.status(200).json(req.body);
 };
 
-export default create;
+export default log;
