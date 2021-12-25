@@ -1,0 +1,25 @@
+{
+  "name": "atix-labs-challenge",
+  "version": "1.0.0",
+  "description": "technical challenge - REST API to write on shared log",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fernandocanizo/atix-labs-challenge.git"
+  },
+  "keywords": [
+    "challenge",
+    "nodejs",
+    "rest",
+    "api"
+  ],
+  "author": "Fernando L. Canizo <fernandocanizo@gmail.com> (https://github.com/fernandocanizo/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fernandocanizo/atix-labs-challenge/issues"
+  },
+  "homepage": "https://github.com/fernandocanizo/atix-labs-challenge#readme"
+}
