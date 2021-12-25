@@ -24,7 +24,8 @@
   },
   "homepage": "https://github.com/fernandocanizo/atix-labs-challenge#readme",
   "dependencies": {
-    "express": "^4.17.2"
+    "express": "^4.17.2",
+    "nodemon": "^2.0.15"
   },
   "devDependencies": {
     "ava": "^3.15.0",
