@@ -25,8 +25,11 @@ export const findNonce = ({ sha256, message }) => {
   }
 };
 
+export const buildCsvLine = ({ sha256, message, nonce }) => 
+  `${sha256},${message},${nonce}`;
+
 export const createInitialLine = message => {
   const sha256 = buildInitialSha();
   const nonce = findNonce({ sha256, message });
-  return `${sha256},${message},${nonce}`;
+  return buildCsvLine({ sha256, message, nonce});
 };
