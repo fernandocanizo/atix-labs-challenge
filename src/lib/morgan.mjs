@@ -12,12 +12,12 @@ const successResponseFormat =
 const errorResponseFormat =
 `${successResponseFormat} - message: :message`;
 
-export const successHandler = morgan(successResponseFormat, {
+export const successHttpLogger = morgan(successResponseFormat, {
   skip: (_, res) => res.statusCode >= 400,
   stream: {write: message => logger.info(message.trim())},
 });
 
-export const errorHandler = morgan(errorResponseFormat, {
+export const errorHttpLogger = morgan(errorResponseFormat, {
   skip: (_, res) => res.statusCode < 400,
   stream: {write: message => logger.error(message.trim())},
 });
