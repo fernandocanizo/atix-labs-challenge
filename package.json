@@ -45,6 +45,7 @@
           "allowTemplateLiterals": true
         }
       ],
+      "operator-linebreak": ["error", "after"],
       "unicorn/prevent-abbreviations": "off",
       "unicorn/catch-error-name": "off",
       "import/no-unassigned-import": [
