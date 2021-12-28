@@ -1,4 +1,17 @@
 #!/bin/sh
+
+# Ensure only staged changes are linted and tested If any program exits with a
+# non-zero status nothing will be committed.
+
 . "$(dirname "$0")/_/husky.sh"
+
+for file in $(git diff --cached --name-only | grep -E '\.(mjs|js|json)$')
+do
+  git show ":${file}" | npx xo --fix "${file}"
+  if [ $? -ne 0 ]; then
+    echo "Linting failed on staged file '${file}'. Please check your code and try again."
+    exit 1
+  fi
+done
 
 npm test
