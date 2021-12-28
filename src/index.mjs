@@ -1,8 +1,9 @@
 import app from './app.mjs';
+import logger from './lib/logger.mjs';
 
 const port = 3000;
 
 app.listen(
   port,
-  () => console.log(`App listening on http://${port}`),
+  () => logger.info(`App listening on http://${port}`),
 );

@@ -1,6 +1,7 @@
 import {writeFile} from 'node:fs/promises';
 import {logPath} from '../../config/default.mjs';
 import {createInitialLine, findNonce, buildCsvLine} from '../lib/log-helpers.mjs';
+import logger from '../lib/logger.mjs';
 
 const log = async (req, res) => {
   const message = req.body.message.trim();
@@ -18,7 +19,7 @@ const log = async (req, res) => {
     await writeFile(logPath, csvLine, {flag: 'a'});
     return res.status(200).end();
   } catch (e) {
-    console.error(e);
+    logger.error(e);
     return res.status(500).json({
       message: `Couldn't write to log file`,
     });
