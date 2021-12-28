@@ -1,8 +1,8 @@
+import {env} from 'node:process';
 import morgan from 'morgan';
-import { env } from 'node:process';
 import logger from './logger.mjs';
 
-const isProduction = 'production' === env.NODE_ENV;
+const isProduction = env.NODE_ENV === 'production';
 
 morgan.token('message', (_, res) => res.locals.errorMessage || '');
 
@@ -14,10 +14,10 @@ const errorResponseFormat =
 
 export const successHandler = morgan(successResponseFormat, {
   skip: (_, res) => res.statusCode >= 400,
-  stream: { write: message => logger.info(message.trim()) },
+  stream: {write: message => logger.info(message.trim())},
 });
 
 export const errorHandler = morgan(errorResponseFormat, {
   skip: (_, res) => res.statusCode < 400,
-  stream: { write: message => logger.error(message.trim()) },
+  stream: {write: message => logger.error(message.trim())},
 });
