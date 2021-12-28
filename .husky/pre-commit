@@ -7,7 +7,7 @@
 
 for file in $(git diff --cached --name-only | grep -E '\.(mjs|js|json)$')
 do
-  git show ":${file}" | npx xo --fix "${file}"
+  git show ":${file}" | npx xo "${file}"
   if [ $? -ne 0 ]; then
     echo "Linting failed on staged file '${file}'. Please check your code and try again."
     exit 1
