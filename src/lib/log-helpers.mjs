@@ -5,7 +5,6 @@ import crypto from 'node:crypto';
 export const buildInitialSha = () => '0'.repeat(64);
 
 export const findNonce = ({sha256, message}) => {
-  // TODO validate with tcomb
   let i = 0;
   const str = sha256 + message;
 
@@ -27,10 +26,34 @@ export const findNonce = ({sha256, message}) => {
 };
 
 export const buildCsvLine = ({sha256, message, nonce}) =>
-  `${sha256},${message},${nonce}\n`;
+  `${sha256},${message},${nonce}`;
 
-export const createInitialLine = message => {
-  const sha256 = buildInitialSha();
-  const nonce = findNonce({sha256, message});
-  return buildCsvLine({sha256, message, nonce});
+export const getResponseData = ({sha256, message, nonce}) => {
+  sha256 = sha256 ? sha256 : buildInitialSha();
+  nonce = nonce ? nonce : findNonce({sha256, message});
+  const str = `${sha256}${message}${nonce}`;
+
+  const newSha256 = crypto
+    .createHash('sha256')
+    .update(str)
+    .digest('hex');
+
+  if (!/^00.*/.test(newSha256)) {
+    throw new Error('Invalid nonce');
+  }
+
+  return {
+    sha256: newSha256,
+    message,
+    nonce,
+  };
+};
+
+export const csv2json = csvLine => {
+  const [sha256, message, nonce] = csvLine.trim().split(',');
+  return {
+    sha256,
+    message,
+    nonce,
+  };
 };
