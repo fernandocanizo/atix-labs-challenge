@@ -4,6 +4,11 @@ import crypto from 'node:crypto';
 // only of zeroes to indicate it's the starting message
 export const buildInitialSha = () => '0'.repeat(64);
 
+export const getSha256 = str => crypto
+  .createHash('sha256')
+  .update(str)
+  .digest('hex');
+
 export const findNonce = ({sha256, message}) => {
   let i = 0;
   const str = sha256 + message;
@@ -12,10 +17,7 @@ export const findNonce = ({sha256, message}) => {
   // hash starting with '00', this could be a possible infinite loop
   /* eslint no-constant-condition: "off" */
   while (true) {
-    sha256 = crypto
-      .createHash('sha256')
-      .update(str + i)
-      .digest('hex');
+    sha256 = getSha256(str + i);
 
     if (/^00.*/.test(sha256)) {
       return i;
@@ -33,11 +35,7 @@ export const getResponseData = ({sha256, message, nonce}) => {
   nonce = nonce ? nonce : findNonce({sha256, message});
   const str = `${sha256}${message}${nonce}`;
 
-  const newSha256 = crypto
-    .createHash('sha256')
-    .update(str)
-    .digest('hex');
-
+  const newSha256 = getSha256(str);
   if (!/^00.*/.test(newSha256)) {
     throw new Error('Invalid nonce');
   }
