@@ -27,6 +27,7 @@
     "express": "^4.17.2",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.15",
+    "tcomb": "^3.2.29",
     "winston": "^3.3.3"
   },
   "devDependencies": {
