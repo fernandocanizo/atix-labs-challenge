@@ -46,12 +46,3 @@ export const getResponseData = ({sha256, message, nonce}) => {
     nonce,
   };
 };
-
-export const csv2json = csvLine => {
-  const [sha256, message, nonce] = csvLine.trim().split(',');
-  return {
-    sha256,
-    message,
-    nonce,
-  };
-};
