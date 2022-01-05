@@ -41,6 +41,8 @@
   "xo": {
     "space": true,
     "rules": {
+      "capitalized-comments": "off",
+      "symbol-description": "off",
       "quotes": [
         "error",
         "single",
