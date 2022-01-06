@@ -8,11 +8,13 @@ import logger from '../lib/logger.mjs';
 
 const log = async (req, res) => {
   try {
+    logger.debug(req.body);
     const responseData = getResponseData({
       sha256: req.body.prevSha256?.trim(),
       message: req.body.message?.trim(),
-      nonce: req.body.nonce?.trim(),
+      nonce: req.body.nonce?.trim?.(),
     });
+    logger.debug(responseData);
 
     await writeFile(logPath, buildCsvLine(responseData), {flag: 'a'});
     return res.status(200).json({

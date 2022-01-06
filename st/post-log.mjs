@@ -17,7 +17,8 @@ let data = await got.post('http://localhost:3000/v1/log', {
 }).json();
 
 console.log('received:\n', data);
-for (let i = 0; i < 1; i++) {
+const runs = 4;
+for (let i = 0; i < runs; i++) {
   payload = {
     message: msg(),
     prevSha256: data.sha256,
