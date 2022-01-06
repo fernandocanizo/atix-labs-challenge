@@ -30,21 +30,14 @@ export const findNonce = ({sha256, message}) => {
 export const buildCsvLine = ({sha256, message, nonce}) =>
   `${sha256},${message},${nonce}\n`;
 
-export const buildResponse = ({sha256, message, nonce}) => {
-  const gotPrevSha = Boolean(sha256);
+export const buildLogLineAndResponse = ({sha256, message}) => {
   sha256 = sha256 ? sha256 : buildInitialSha();
-  nonce = nonce ? nonce : findNonce({sha256, message});
+  const nonce = findNonce({sha256, message});
+  const csvLine = buildCsvLine({sha256, message, nonce});
   const str = `${sha256}${message}${nonce}`;
 
-  const newSha256 = getSha256(str);
-  if (!/^00.*/.test(newSha256)) {
-    throw new Error('Invalid nonce');
-  }
-
   return {
-    // send initial sha if no sha received
-    sha256: gotPrevSha ? newSha256 : sha256,
-    message,
-    nonce,
+    csvLine,
+    response: getSha256(str),
   };
 };

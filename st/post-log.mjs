@@ -1,38 +1,29 @@
 import got from 'got';
-import faker from 'faker';
+import logger from '../src/lib/logger.mjs';
 
-const msg = () => `${faker.hacker.adjective()} ${faker.hacker.noun()}`;
+const messages = [
+  'uno',
+  'dos',
+  'tres',
+  'cuatro',
+];
 
-let payload = {
-  message: msg(),
-};
+let prevSha256;
 
-console.log('sent:\n', JSON.stringify(payload));
-
-let data = await got.post('http://localhost:3000/v1/log', {
-  json: payload,
-  timeout: {
-    request: 3000,
-  },
-}).json();
-
-console.log('received:\n', data);
-const runs = 4;
-for (let i = 0; i < runs; i++) {
-  payload = {
-    message: msg(),
-    prevSha256: data.sha256,
-    nonce: data.nonce,
+for await (const message of messages) {
+  const payload = {
+    message,
+    prevSha256,
   };
+  logger.debug(`sent:\n'${JSON.stringify(payload)}`);
 
-  console.log('sent:\n', JSON.stringify(payload));
-  // I want the delay for the time being
-  /* eslint {no-await-in-loop: "off"} */
-  data = await got.post('http://localhost:3000/v1/log', {
+  const data = await got.post('http://localhost:3000/v1/log', {
     json: payload,
     timeout: {
       request: 3000,
     },
   }).json();
-  console.log('received:\n', data);
+  logger.debug(`received:\n${data}`);
+  prevSha256 = data;
 }
+
