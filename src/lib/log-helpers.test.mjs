@@ -4,7 +4,7 @@ import {
   getSha256,
   findNonce,
   buildCsvLine,
-  getResponseData,
+  buildResponse,
 } from './log-helpers.mjs';
 
 import {tSha256String} from './types.mjs';
@@ -42,11 +42,11 @@ test('buildCsvLine: should return a CSV line composed of sha256, a message, an i
   t.is(Number(rNonce), nonce);
 });
 
-test('getResponseData: should return an object with new sha and old message and nonce', t => {
+test('buildResponse: should return an object with new sha and old message and nonce', t => {
   const sha256 = tSha256String(getSha256('test'));
   const message = 'hello';
   const nonce = findNonce({sha256, message});
-  const result = getResponseData({sha256, message, nonce});
+  const result = buildResponse({sha256, message, nonce});
   // Kind of sketchy: I used this function to obtain the resulting sha256
   t.deepEqual(result, {
     sha256: '0044a8091d5007ad1bd41f8857329bd2671dd077de0d66ecc3cda25e73daddfd',

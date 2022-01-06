@@ -1,7 +1,7 @@
 import {writeFile} from 'node:fs/promises';
 import {logPath} from '../../config/default.mjs';
 import {
-  getResponseData,
+  buildResponse,
   buildCsvLine,
 } from '../lib/log-helpers.mjs';
 import logger from '../lib/logger.mjs';
@@ -9,7 +9,7 @@ import logger from '../lib/logger.mjs';
 const log = async (req, res) => {
   try {
     logger.debug(req.body);
-    const responseData = getResponseData({
+    const responseData = buildResponse({
       sha256: req.body.prevSha256?.trim(),
       message: req.body.message?.trim(),
       nonce: req.body.nonce?.trim?.(),

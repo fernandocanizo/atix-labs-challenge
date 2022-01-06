@@ -30,7 +30,7 @@ export const findNonce = ({sha256, message}) => {
 export const buildCsvLine = ({sha256, message, nonce}) =>
   `${sha256},${message},${nonce}\n`;
 
-export const getResponseData = ({sha256, message, nonce}) => {
+export const buildResponse = ({sha256, message, nonce}) => {
   const gotPrevSha = Boolean(sha256);
   sha256 = sha256 ? sha256 : buildInitialSha();
   nonce = nonce ? nonce : findNonce({sha256, message});
