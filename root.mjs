@@ -1,4 +1,6 @@
 import {dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
 
-global.rootPath = dirname(fileURLToPath(import.meta.url));
+const rootPath = dirname(fileURLToPath(import.meta.url));
+
+export default rootPath;

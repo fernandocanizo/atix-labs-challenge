@@ -1,4 +1,4 @@
 import {join} from 'node:path';
-import '../root.mjs';
+import rootPath from '../root.mjs';
 
-export const logPath = join(global.rootPath, 'log/default');
+export const logPath = join(rootPath, 'log/default');
