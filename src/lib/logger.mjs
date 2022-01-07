@@ -1,5 +1,6 @@
 import {env} from 'node:process';
 import winston from 'winston';
+import at from './at.mjs';
 
 const isDevelopment = env.NODE_ENV === 'development';
 
@@ -26,4 +27,23 @@ const logger = winston.createLogger({
   ],
 });
 
-export default logger;
+const logLevels = [
+  'error',
+  'warn',
+  'info',
+  'http',
+  'verbose',
+  'debug',
+  'silly',
+];
+
+// Build a function for every log level
+const loggers = logLevels.reduce((o, level) => {
+  // I really don't want to deal with this now, so I'm disabling it:
+  /* eslint unicorn/no-array-reduce: "off" */
+  /* eslint unicorn/prefer-object-from-entries: "off" */
+  o[level] = msg => logger[level](at(msg));
+  return o;
+}, {});
+
+export default loggers;
