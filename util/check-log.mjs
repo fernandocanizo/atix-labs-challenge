@@ -1,11 +1,11 @@
 import {readFileSync} from 'node:fs';
-import {logPath} from '../../config/default.mjs';
+import {logPath} from '../config/default.mjs';
 import {
   buildInitialSha,
   getSha256,
   buildLogLineAndResponse,
-} from '../../src/lib/log-helpers.mjs';
-import logger from '../../src/lib/logger.mjs';
+} from '../src/lib/log-helpers.mjs';
+import logger from '../src/lib/logger.mjs';
 
 let shaToFind = buildInitialSha();
 let discardedLinesCount = 0;
