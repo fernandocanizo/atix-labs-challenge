@@ -13,16 +13,16 @@ npm start
 
 ## Folders
 
-- config
+- `config`
   App configuration
 
-- log
+- `log`
   Empty folder to have a default place for logs
 
-- src
+- `src`
   Source code
 
-- st
+- `util`
   Scripts for _Stress Testing_ the API and CLI utilities
 
 ## Utils
