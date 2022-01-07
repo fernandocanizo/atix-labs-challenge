@@ -5,6 +5,7 @@
   "main": "src/index.mjs",
   "scripts": {
     "start": "NODE_ENV=development nodemon src/index.mjs",
+    "lint": "npx xo",
     "test": "ava"
   },
   "repository": {
